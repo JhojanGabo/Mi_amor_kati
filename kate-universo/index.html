@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05020c">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Hay algo que quiero mostrarte.">
+  <meta property="og:title" content="Para ti ✦">
+  <meta property="og:description" content="Hay algo que quiero mostrarte.">
+  <title>Para ti ✦</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Manrope:wght@300;400;600&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-scene="intro">
+
+  <div class="nebula" aria-hidden="true"></div>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="flash" id="flash" aria-hidden="true"></div>
+
+  <header class="hud">
+    <nav class="dots" id="dots" aria-label="Capítulos"></nav>
+    <button class="icon-btn" id="soundBtn" type="button" aria-pressed="false" aria-label="Activar música ambiental" title="Música ambiental">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.5" fill="currentColor"/><circle cx="16.5" cy="16" r="2.5" fill="currentColor"/></svg>
+      <span class="slash" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <noscript><p style="position:relative;z-index:50;color:#fff;padding:2rem;text-align:center">Esta página necesita JavaScript para mostrarse. 💜</p></noscript>
+
+  <main id="stage">
+
+    <!-- 1 · BIENVENIDA -->
+    <section class="scene" id="intro" aria-label="Bienvenida">
+      <div class="inner center">
+        <p class="eyebrow rv" style="--d:.3s" data-t="intro.eyebrow"></p>
+        <h1 class="mega rv" style="--d:.7s" data-her></h1>
+        <p class="quote rv" style="--d:1.6s" data-t="intro.quote"></p>
+        <button class="btn btn-primary rv" style="--d:2.6s" id="introBtn" type="button" data-t="intro.button"></button>
+        <p class="fine rv" style="--d:3.2s" data-t="intro.hint"></p>
+      </div>
+    </section>
+
+    <!-- 2 · AMERI -->
+    <section class="scene" id="ameri" aria-label="Un viaje hacia Ameri">
+      <div class="horizon" aria-hidden="true">
+        <div class="planet"></div>
+        <div class="ring"></div>
+        <svg class="hills hills-back" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0 220 C180 130 320 190 520 150 C720 110 860 200 1060 160 C1220 130 1340 170 1440 140 L1440 320 L0 320Z"/></svg>
+        <svg class="hills hills-front" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0 260 C200 210 380 270 600 235 C820 200 1000 275 1200 240 C1320 220 1400 245 1440 235 L1440 320 L0 320Z"/></svg>
+      </div>
+      <div class="inner center">
+        <p class="eyebrow rv" style="--d:.2s" data-t="ameri.eyebrow"></p>
+        <h2 class="h2 rv" style="--d:.5s" data-t="ameri.title"></h2>
+        <p class="lead rv" style="--d:.9s" data-t="ameri.lead"></p>
+        <blockquote class="quote big rv" style="--d:1.3s" data-t="ameri.phrase"></blockquote>
+
+        <div class="player rv" style="--d:1.7s" id="player">
+          <div class="player-top">
+            <div class="disc" aria-hidden="true"><i></i></div>
+            <div class="meta"><strong id="songTitle"></strong><span id="songArtist"></span></div>
+            <div class="eq" id="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="embed" id="embed" hidden></div>
+          <div class="player-actions">
+            <button class="btn btn-primary" id="playSong" type="button"></button>
+            <a class="chip" id="ytLink" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a class="chip" id="spLink" target="_blank" rel="noopener noreferrer">Spotify</a>
+          </div>
+          <p class="fine" data-t="ameri.fine"></p>
+        </div>
+
+        <button class="btn btn-ghost rv" style="--d:2.1s" type="button" data-go="story" data-t="ameri.next"></button>
+      </div>
+    </section>
+
+    <!-- 3 · HISTORIA -->
+    <section class="scene" id="story" aria-label="Algo que quiero que sepas">
+      <div class="inner center">
+        <h2 class="h2 serif rv" style="--d:.3s" data-t="story.title"></h2>
+        <div class="lines" id="storyLines" aria-live="polite"></div>
+        <button class="btn btn-ghost gate" id="storyNext" type="button" data-go="explore" data-t="story.next"></button>
+      </div>
+    </section>
+
+    <!-- 4 · SORPRESAS -->
+    <section class="scene" id="explore" aria-label="Sorpresas">
+      <div class="inner center">
+        <h2 class="h2 rv" style="--d:.2s" data-t="explore.title"></h2>
+        <div class="cards">
+          <article class="card rv" style="--d:.5s">
+            <h3 data-t="explore.secretTitle"></h3>
+            <button class="btn btn-ghost" id="secretBtn" type="button" data-t="explore.secretBtn"></button>
+            <div class="reveal" id="secretBox"><div><p class="secret-text" data-t="explore.secretMsg"></p></div></div>
+          </article>
+
+          <article class="card rv" style="--d:.8s">
+            <h3 data-t="explore.counterTitle"></h3>
+            <div class="const-wrap"><svg id="constSvg" viewBox="0 0 100 100" role="img" aria-label="Constelación en forma de corazón"></svg></div>
+            <div class="count"><span id="countNum">0</span><small data-t="explore.counterLabel"></small></div>
+            <button class="btn btn-ghost" id="countBtn" type="button" data-t="explore.counterBtn"></button>
+            <p class="fine" id="countNote" data-t="explore.counterHint"></p>
+          </article>
+        </div>
+        <button class="btn btn-primary rv" style="--d:1.2s" type="button" data-go="wish" data-t="explore.next"></button>
+      </div>
+    </section>
+
+    <!-- 5 · DESEO -->
+    <section class="scene" id="wish" aria-label="Si pudiera pedir un deseo">
+      <div class="inner center">
+        <h2 class="h2 serif rv" style="--d:.3s" data-t="wish.title"></h2>
+        <p class="fine rv" style="--d:.6s" data-t="wish.hint"></p>
+        <div class="wish-card gate" id="wishCard" aria-live="polite"><p id="wishText"></p></div>
+        <div class="row rv" style="--d:.9s">
+          <button class="btn btn-primary" id="wishBtn" type="button" data-t="wish.btn"></button>
+          <button class="btn btn-ghost gate" id="wishNext" type="button" data-go="proposal" data-t="wish.next"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · DECLARACIÓN -->
+    <section class="scene" id="proposal" aria-label="La pregunta">
+      <div class="inner center">
+        <div class="prop-lines" id="propLines" aria-live="polite"></div>
+        <h2 class="ask gate" id="ask" data-t="proposal.question"></h2>
+        <div class="answers gate" id="answers">
+          <button class="btn btn-yes" id="yesBtn" type="button" data-t="proposal.yes"></button>
+          <button class="btn btn-ghost btn-no" id="noBtn" type="button" data-t="proposal.no"></button>
+          <p class="no-hint" id="noHint" aria-live="polite"></p>
+          <button class="link-btn" id="moreBtn" type="button" data-t="proposal.more"></button>
+        </div>
+
+        <div class="panel gate" id="morePanel" role="region" aria-live="polite">
+          <p id="panelMsg"></p>
+          <div class="row">
+            <button class="btn btn-ghost" id="moreExplore" type="button" data-t="proposal.moreExplore"></button>
+            <button class="btn btn-primary" id="moreBack" type="button" data-t="proposal.moreBack"></button>
+          </div>
+        </div>
+
+        <div class="yes-wrap gate" id="yesWrap">
+          <div class="big-heart" aria-hidden="true">❤</div>
+          <p class="yes-msg" id="yesMsg" aria-live="polite"></p>
+          <button class="btn btn-primary gate" id="yesNext" type="button" data-go="closing" data-t="proposal.yesNext"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · CIERRE -->
+    <section class="scene" id="closing" aria-label="Cierre">
+      <div class="inner center">
+        <h2 class="mega closing-name rv" style="--d:.5s" data-her></h2>
+        <p class="quote big rv" style="--d:1.6s" data-t="closing.line"></p>
+        <p class="signature rv" style="--d:3.2s" id="signature"></p>
+        <div class="row rv" style="--d:4s">
+          <button class="btn btn-ghost" id="againBtn" type="button" data-t="closing.again"></button>
+          <button class="btn btn-ghost" id="backAskBtn" type="button" data-t="closing.backAsk"></button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="devbar" id="devbar" hidden>⚠️ Modo prueba: cambia <b>fromName</b> en config.js antes de compartir.</div>
+
+  <script src="config.js"></script>
+  <script src="effects.js"></script>
+  <script src="audio.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
